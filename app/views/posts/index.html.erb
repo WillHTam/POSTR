@@ -1,0 +1,22 @@
+
+<h1>SHOW ME THE POSTS</h1>
+
+  <tbody class="miaou">
+    <% @posts.each do |post| %>
+      <div class="post_wrapper posts">
+        <td>
+          <h2 class="title">
+            <%= post.title %>
+          </h2>
+        </td>
+        <td>
+          <p class="date">
+            <%= post.created_at.in_time_zone('Singapore').strftime("%A, %B %d, %Y [%I : %M : %S : %L %p]") %>
+          </p>
+        </td>
+        <td><%= link_to 'Show', user_post_path(post.user_id, post) %></td>
+        <td>| <%= link_to 'Edit', edit_user_post_path(post.user_id, post) %></td>
+        <td>| <%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </div>
+    <% end %>
+  </tbody>

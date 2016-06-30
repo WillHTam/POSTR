@@ -1,0 +1,34 @@
+<h1>New Post</h1>
+
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :media %>
+    <%= f.file_field :media %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create Post" %>
+  </div>
+  <div class="actions">
+   <%= link_to 'Back', posts_path %>
+  </div>
+<% end %>
