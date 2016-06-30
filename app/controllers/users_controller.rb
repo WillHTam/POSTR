@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
         AutoMailer.welcome_email(@user).deliver
 
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
         #render "index"
         format.json { render :show, status: :created, location: @user }
       else

@@ -1,5 +1,5 @@
 class SocializationsController < ApplicationController
-before_filter :load_socializable
+before_action :load_socializable
 
   def follow
     current_user.follow!(@socializable)
@@ -8,17 +8,7 @@ before_filter :load_socializable
 
   def unfollow
     current_user.unfollow!(@socializable)
-    render json: { follow: false }
-  end
-
-  def like
-    current_user.like!(@socializable)
-    redirect_to posts_path
-  end
-
-  def unlike
-    current_user.unlike!(@socializable)
-    redirect_to posts_path
+    redirect_to users_path
   end
 
 private

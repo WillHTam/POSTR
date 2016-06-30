@@ -20,11 +20,9 @@
 
 <p>
   <%= link_to('Be Friends', user_follow_path(@user), method: :post) %>
+  <%= link_to('Messy Breakup', user_unfollow_path(@user), method: :post) %>
 </p>
 
 <p>
   Are you friends with this person? [<%= @user.followed_by?(current_user)  %>]
 <p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

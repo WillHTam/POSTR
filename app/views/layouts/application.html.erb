@@ -17,15 +17,10 @@
   }(document, 'script', 'facebook-jssdk'));</script>
 
   <div id="sidebar">
-    <!-- <div id="logo">
-      <%= link_to root_path do %>
-        <%= image_tag "kokoi.jpeg" %>
-      <% end %>
-    </div> -->
 
     <ul>
       <li class="category">NAVIGATION</li>
-      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "All Posts", root_path %></li>
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Users", "/users" %></li>
     </ul>
@@ -39,6 +34,7 @@
       <% if user_logged_in? %>
       <h4>Welcome, <%= current_user.email %></h4>
       <%= link_to "Sign Out", sign_out_path, method: :delete %>
+      | <%= link_to "My Posts", user_posts_path(current_user)%>
       <% else %>
       <% if !(current_page?(sign_in_path)) %>
       <%= link_to "Sign In", sign_in_path %>

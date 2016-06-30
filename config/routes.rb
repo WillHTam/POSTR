@@ -1,21 +1,13 @@
 Rails.application.routes.draw do
-  get 'socializations/follow'
-
-  get 'socializations/unfollow'
-
-  get 'static/about'
-
-  get 'home/index'
+  get 'home', to: 'posts#home'
 
   get 'about', to: 'static#about'
 
-  root 'posts#index'
-  get '/', to: 'posts#index'
+  root 'posts#home'
+  get '/', to: 'posts#home'
 
   resources :posts
   resources :users
-
-  post 'search', to: 'posts#search'
 
   get 'login', to: 'sessions#new'
   get 'sign_in', to: 'sessions#new'
@@ -31,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :users do
+  resources :users, only: [:new, :create] do
     resources :posts
     post 'follow',   to: 'socializations#follow'
     post 'unfollow', to: 'socializations#unfollow'
@@ -39,9 +31,9 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
-    post 'like', to: 'socializations#like'
-    post 'unlike', to: 'socializations#unlike'
   end
+
+  get 'post/:id/like', to: 'posts#like', as: :like
 
 end
 

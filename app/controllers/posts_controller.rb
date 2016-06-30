@@ -1,15 +1,21 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :log_check
 
   # GET /posts
   # GET /posts.json
+  def home
+    @home = Post.all.order('created_at DESC')
+  end
+
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.where(user_id: current_user).order('created_at DESC')
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
@@ -77,8 +83,9 @@ class PostsController < ApplicationController
   end
 
   def like
+    @user = current_user
     @post = Post.find(params[:id])
-    @post.liked_by current_user
+    @user.toggle_like!(@post)
     redirect_to :back
   end
 
